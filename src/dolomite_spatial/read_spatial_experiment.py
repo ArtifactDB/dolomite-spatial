@@ -79,7 +79,7 @@ def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExper
         if len(image_samples) > 0:
             for i, _ in enumerate(image_samples):
                 # TODO: write reader for SpatialImage class
-                image_data.append(construct_spatial_image_class(os.path.join(_img_path, f"{i}.{image_formats[i]}")))
+                image_data.append(construct_spatial_image_class(os.path.join(_img_path, f"{i}.{image_formats[i].tolower()}")))
 
         _image_frame = BiocFrame(
             {
