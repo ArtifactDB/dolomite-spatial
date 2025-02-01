@@ -1,5 +1,5 @@
 [![PyPI-Server](https://img.shields.io/pypi/v/dolomite-spatial.svg)](https://pypi.org/project/dolomite-spatial/)
-![Unit tests](https://github.com/BiocPy/dolomite-spatial/actions/workflows/run-tests.yml/badge.svg)
+![Unit tests](https://github.com/ArtifactDB/dolomite-spatial/actions/workflows/run-tests.yml/badge.svg)
 
 # Save and write `SpatialExperiment`'s in Python
 
