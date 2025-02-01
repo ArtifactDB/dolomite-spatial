@@ -41,7 +41,6 @@ def save_spatial_experiment(
     Returns:
         ``x`` is saved to path.
     """
-    print("in spatial saver")
     if img_data_args is None:
         img_data_args = {}
 

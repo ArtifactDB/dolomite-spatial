@@ -20,14 +20,12 @@ def test_basic_reader():
 def test_basic_writer():
     rpath = os.getcwd() + "/tests/data"
     dir = os.path.join(mkdtemp(), "spatial_rtrip")
-    print(dir)
 
     spe = read_object(rpath)
     assert isinstance(spe, SpatialExperiment)
 
     save_object(spe, dir)
 
-    print("RTRIPPPP")
     rtrip =  read_object(dir)
     assert isinstance(rtrip, SpatialExperiment)
     assert spe.shape == rtrip.shape

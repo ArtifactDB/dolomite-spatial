@@ -34,7 +34,6 @@ def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExper
         :py:class:`~spatialexperiment.SpatialExperiment.SpatialExperiment`
         with file-backed arrays in the assays.
     """
-    print("in spatial")
     sce = dlsce.read_single_cell_experiment(path, metadata=metadata, **kwargs)
 
     spe = SpatialExperiment(
