@@ -8,9 +8,11 @@ else:
 
 try:
     # Change here if project is renamed and does not equal the package name
-    dist_name = "dolomite-spatial"
+    dist_name = "dolomite-spe"
     __version__ = version(dist_name)
 except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 finally:
     del version, PackageNotFoundError
+
+from .read_spatial_experiment import read_spatial_experiment
