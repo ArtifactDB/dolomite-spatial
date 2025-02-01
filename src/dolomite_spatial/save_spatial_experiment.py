@@ -2,7 +2,7 @@ import json
 import os
 
 import dolomite_base as dl
-import dolomite_se as dlse
+import dolomite_sce as dlsce
 import h5py
 import numpy as np
 from PIL import Image
@@ -41,10 +41,11 @@ def save_spatial_experiment(
     Returns:
         ``x`` is saved to path.
     """
+    print("in spatial saver")
     if img_data_args is None:
         img_data_args = {}
 
-    dlse.save_single_cell_experiment(x, path, **kwargs)
+    dlsce.save_single_cell_experiment(x, path, **kwargs)
 
     # Modify OBJECT
     _info = dl.read_object_file(path)
@@ -54,7 +55,6 @@ def save_spatial_experiment(
     # save spatial_coordinates
     _scoords = x.get_spatial_coordinates()
     _scoords_path = os.path.join(path, "coordinates")
-    os.mkdir(_scoords_path)
     dl.alt_save_object(_scoords, path=_scoords_path, **kwargs)
 
     # save image data
@@ -63,19 +63,19 @@ def save_spatial_experiment(
         _imgdata_path = os.path.join(path, "images")
         os.mkdir(_imgdata_path)
 
-        with h5py.File(os.path.join(path, "mapping.h5"), "w") as handle:
+        with h5py.File(os.path.join(_imgdata_path, "mapping.h5"), "w") as handle:
             ghandle = handle.create_group("spatial_experiment")
 
-            sample_names = list(set(_imgdata.get_column("sample_ids")))
+            sample_names = list(set(_imgdata.get_column("sample_id")))
             dl.write_string_vector_to_hdf5(ghandle, name="sample_names", x=sample_names)
 
-            column_samples = [sample_names.index(z) for z in x.get_column_data().get_column("sample_ids")]
+            column_samples = [sample_names.index(z) for z in x.get_column_data().get_column("sample_id")]
             dl.write_integer_vector_to_hdf5(ghandle, name="column_samples", x=column_samples, h5type="u4")
 
-            image_samples = [sample_names.index(z) for z in _imgdata.get_column("sample_ids")]
+            image_samples = [sample_names.index(z) for z in _imgdata.get_column("sample_id")]
             dl.write_integer_vector_to_hdf5(ghandle, name="image_samples", x=image_samples, h5type="u4")
 
-            dl.write_boolean_vector_to_hdf5(ghandle, name="image_ids", x=_imgdata.get_column("image_ids"))
+            dl.write_string_vector_to_hdf5(ghandle, name="image_ids", x=_imgdata.get_column("image_id"))
             dl.write_float_vector_to_hdf5(ghandle, name="image_scale_factors", x=_imgdata.get_column("scale_factor"))
 
             # write images themselves

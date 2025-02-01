@@ -20,14 +20,16 @@ def test_basic_reader():
 def test_basic_writer():
     rpath = os.getcwd() + "/tests/data"
     dir = os.path.join(mkdtemp(), "spatial_rtrip")
+    print(dir)
 
     spe = read_object(rpath)
     assert isinstance(spe, SpatialExperiment)
 
     save_object(spe, dir)
 
+    print("RTRIPPPP")
     rtrip =  read_object(dir)
-    assert isinstance(spe, rtrip)
+    assert isinstance(rtrip, SpatialExperiment)
     assert spe.shape == rtrip.shape
     assert "sample_id" in rtrip.get_column_data().get_column_names()
     assert len(set(rtrip.get_column_data().get_column("sample_id")).difference(["section1", "section2"])) == 0

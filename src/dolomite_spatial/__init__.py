@@ -16,3 +16,4 @@ finally:
     del version, PackageNotFoundError
 
 from .read_spatial_experiment import read_spatial_experiment
+from .save_spatial_experiment import save_spatial_experiment

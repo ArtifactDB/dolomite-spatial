@@ -8,7 +8,7 @@ from biocframe import BiocFrame
 from dolomite_base.read_object import read_object_registry
 from spatialexperiment import SpatialExperiment, construct_spatial_image_class
 
-read_object_registry["spatial_experiment"] = "dolomite_spe.read_spatial_experiment"
+read_object_registry["spatial_experiment"] = "dolomite_spatial.read_spatial_experiment"
 
 
 def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExperiment:
@@ -34,7 +34,7 @@ def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExper
         :py:class:`~spatialexperiment.SpatialExperiment.SpatialExperiment`
         with file-backed arrays in the assays.
     """
-
+    print("in spatial")
     sce = dlsce.read_single_cell_experiment(path, metadata=metadata, **kwargs)
 
     spe = SpatialExperiment(
