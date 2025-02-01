@@ -1,0 +1,7 @@
+dolomite_spatial
+================
+
+.. toctree::
+   :maxdepth: 4
+
+   dolomite_spatial

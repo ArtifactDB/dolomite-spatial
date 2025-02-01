@@ -1,0 +1,37 @@
+dolomite\_spatial package
+=========================
+
+Submodules
+----------
+
+dolomite\_spatial.read\_spatial\_experiment module
+--------------------------------------------------
+
+.. automodule:: dolomite_spatial.read_spatial_experiment
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dolomite\_spatial.save\_image module
+------------------------------------
+
+.. automodule:: dolomite_spatial.save_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dolomite\_spatial.save\_spatial\_experiment module
+--------------------------------------------------
+
+.. automodule:: dolomite_spatial.save_spatial_experiment
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: dolomite_spatial
+   :members:
+   :undoc-members:
+   :show-inheritance:
