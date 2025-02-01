@@ -1,20 +1,21 @@
 import os
 import shutil
+from typing import Optional
 
 from PIL import Image
 
 
-def save_image(src: str, directory: str, i: int) -> str | None:
+def save_image(src: str, directory: str, i: int) -> Optional[str]:
     """Save an image file with proper format handling.
 
     Args:
-        src: 
+        src:
             Source path of the image.
 
-        directory: 
+        directory:
             Directory to save the image to.
 
-        i: 
+        i:
             Index of the image.
 
     Returns:
