@@ -1,4 +1,3 @@
-import json
 import os
 
 import dolomite_base as dl
@@ -77,8 +76,14 @@ def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExper
         image_data = []
         if len(image_samples) > 0:
             for i, _ in enumerate(image_samples):
-                # TODO: write reader for SpatialImage class
-                image_data.append(construct_spatial_image_class(os.path.join(_img_path, f"{i}.{str(image_formats[i]).lower()}")))
+                if str(image_formats[i]).lower() == "other":
+                    image_data.append(dl.alt_read_object(os.path.join(_img_path, str(i)), **kwargs))
+                else:
+                    image_data.append(
+                        construct_spatial_image_class(
+                            os.path.join(_img_path, f"{i}.{str(image_formats[i]).lower()}"), is_url=False
+                        )
+                    )
 
         _image_frame = BiocFrame(
             {
