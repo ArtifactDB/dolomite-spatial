@@ -4,10 +4,33 @@ import dolomite_base as dl
 import dolomite_sce as dlsce
 import h5py
 from biocframe import BiocFrame
+from delayedarray import is_sparse, to_dense_array, to_scipy_sparse_matrix
 from dolomite_base.read_object import read_object_registry
 from spatialexperiment import SpatialExperiment, construct_spatial_image_class
 
 read_object_registry["spatial_experiment"] = "dolomite_spatial.read_spatial_experiment"
+
+
+def realize_array(x):
+    """Realize a `ReloadedArray` into a dense array or sparse matrix.
+
+    Args:
+        x:
+            `ReloadedArray` object.
+
+    Returns:
+
+        Realized array or matrix.
+    """
+    from dolomite_matrix import ReloadedArray
+
+    if isinstance(x, ReloadedArray):
+        if is_sparse(x):
+            x = to_scipy_sparse_matrix(x, "csc")
+        else:
+            x = to_dense_array(x)
+
+    return x
 
 
 def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExperiment:
@@ -49,7 +72,7 @@ def read_spatial_experiment(path: str, metadata: dict, **kwargs) -> SpatialExper
     _sp_coords_path = os.path.join(path, "coordinates")
     if os.path.exists(_sp_coords_path):
         _coords = dl.alt_read_object(_sp_coords_path, **kwargs)
-        spe = spe.set_spatial_coordinates(_coords)
+        spe = spe.set_spatial_coordinates(realize_array(_coords))
     else:
         raise FileNotFoundError(f"cannot find spatial coordinates at {path}.")
 
